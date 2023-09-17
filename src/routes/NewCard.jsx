@@ -1,36 +1,85 @@
-import { useDispatch } from "react-redux";
+//IMPORTS
+import { useDispatch, useSelector } from "react-redux";
 import { addCard } from "../features/CardSlice";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
+//EXPORT NEWCARD
 export const NewCard = () => {
     const dispatch = useDispatch();
+    const user = useSelector((state) => state.user.user);
+    const [numberError, setNumberError] = useState("");
+    const [ccvError, setCcvError] = useState("");
+    const [dateError, setDateError] = useState("");
+
+
+//HANDLE SUBMIT + ALLa ERROR MESSAGE OM ANVÄNDARE SKRIVER FEL INPUT 
+    const handleSubmit = () => {
+        const number = document.querySelector("#number").value;
+        const ccv = document.querySelector("#ccv").value;
+        const date = document.querySelector("#date").value;
+
+        //ERROR TEXT FÖR FEL INPUT
+    
+        if (number.length !== 16) {
+            setNumberError("Card number must be 16 digits.");
+            return;
+          } else {
+            setNumberError("");
+          }
+
+          if (ccv.length !== 3) {
+            setCcvError("CCV must be 3 digits.");
+            return;
+          } else {
+            setCcvError("");
+        }
+
+        if (date.length !== 4) {
+            setDateError("Date must be 4 digits.");
+            return;
+          } else {
+            setDateError("");
+          }
+
+        dispatch(addCard({ number, ccv, date }));
+    }
+
     return(
         <div>
-            <h1>Add Card</h1>
+            <h1>Add Cards</h1>
+           
+            <input type="text" id="holder" value={`${user.name?.first} ${user.name?.last}`} readOnly />
+            <br />
 
-            <input type="text" id="number" placeholder="Enter Card Number"/>
-            <br />
-            <input type="text" id="ccv" placeholder="Enter CCV" />
-            <br />
-            <input type="text" id="type" placeholder="Enter Card Type" />
-            <br />
-            <input type="text" id="date" placeholder="Valid Through" /> 
-            <br /><br />
-            <Link to="/" ><button
-            onClick={()=>{
-                let number = document.querySelector("#number").value;
-                let ccv = document.querySelector("#ccv").value;
-                let type = document.querySelector("#type").value;
-                let date = document.querySelector("#date").value;
-
-                dispatch(addCard({ number, ccv, type, date })); 
+    {/* Card Number Input */}
+        {numberError && <p style={{ color: "red" }}>{numberError}</p>}
+            <input 
+            type="text" 
+            id="number" 
+            maxLength="16" 
+            placeholder="Enter Card Number"
+            onInput={(e) => {
+                e.target.value = e.target.value.replace(/[^0-9]/g, ''); 
             }}
-            >Add Card</button></Link>
-            
+            required
+            />  
             <br />
+    {/* CCV Input */}
+        {ccvError && <p style={{ color: "red" }}>{ccvError}</p>}
+            <input type="text" id="ccv" maxLength="3" placeholder="Enter CCV" required/>
+            <br />
+    {/* Date Input */}
+        {dateError && <p style={{ color: "red" }}>{dateError}</p>}
+            <input type="text" id="date" maxLength="4" placeholder="Valid Through" required /> 
+            <br /><br />
 
-            
 
+
+    {/* ADD/SUBMIT */}
+            <button onClick={handleSubmit}>Save</button>
+            <br /> 
+            <Link to="/" ><button>Add Cards</button></Link>
         </div>
     )
 }
