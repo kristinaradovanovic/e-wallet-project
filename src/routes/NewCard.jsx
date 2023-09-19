@@ -47,7 +47,7 @@ export const NewCard = () => {
             setDateError("");
           }
 
-        dispatch(addCard({ number, ccv, date }));
+        dispatch(addCard({ number, ccv, date, active: false }));
 
         //Rensa input efter submit
         numberInput.value = "";

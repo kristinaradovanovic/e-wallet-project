@@ -20,7 +20,6 @@ const cardSlice = createSlice({
             last:""
         },
         cards: [],
-        activeCardIndex: null
     },
 
     reducers: {

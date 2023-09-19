@@ -70,29 +70,3 @@ export const Card = ({ user, cards, index }) => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-        {/* <div className={`cardWrapper ${cards.active ? "activeCard" : "inactiveCard"}`}>
-            <p>{user.name?.title} {user.name?.first} {user.name?.last}</p>
-            <p><strong>Card Number:</strong> {cards.number}</p>
-            <p><strong>CCV:</strong> {cards.ccv}</p>
-            <p><strong>Expiration Date:</strong> {cards.date}</p>
-
-            <button onClick={handleDelete} disabled={cards.active}>
-            Delete
-            </button>
-
-            <button onClick={handleToggleActive}>
-            {cards.active ? "Deactivate" : "Activate"}
-        </button>
-            <hr />
-        </div> */}
