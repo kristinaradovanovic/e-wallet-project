@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-
 export const getRandomUser = createAsyncThunk(
     "cardSlice/getRandomUser",
     async () => {
@@ -12,7 +11,6 @@ export const getRandomUser = createAsyncThunk(
     }
     );
 
-
 const cardSlice = createSlice({
     name: "cardSlice",
     initialState: {
@@ -21,7 +19,8 @@ const cardSlice = createSlice({
             first:"",
             last:""
         },
-        cards: []
+        cards: [],
+        activeCardIndex: null
     },
 
     reducers: {
@@ -31,6 +30,10 @@ const cardSlice = createSlice({
         deleteCard: (state, action) => {
             state.cards.splice(action.payload, 1);
           },
+        toggleCardActive: (state, action) => {
+            const cardIndex = action.payload;
+            state.cards[cardIndex].active = !state.cards[cardIndex].active;
+        },
     },
     extraReducers: {
         [getRandomUser.fulfilled]: (state, action) =>{
@@ -40,4 +43,4 @@ const cardSlice = createSlice({
 })
 
 export default cardSlice.reducer;
-export const {addCard, deleteCard} = cardSlice.actions;
+export const {addCard, deleteCard, toggleCardActive} = cardSlice.actions;

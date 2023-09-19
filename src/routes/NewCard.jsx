@@ -8,6 +8,7 @@ import { useState } from "react";
 export const NewCard = () => {
     const dispatch = useDispatch();
     const user = useSelector((state) => state.user.user);
+
     const [numberError, setNumberError] = useState("");
     const [ccvError, setCcvError] = useState("");
     const [dateError, setDateError] = useState("");
@@ -15,9 +16,13 @@ export const NewCard = () => {
 
 //HANDLE SUBMIT + ALLa ERROR MESSAGE OM ANVÄNDARE SKRIVER FEL INPUT 
     const handleSubmit = () => {
-        const number = document.querySelector("#number").value;
-        const ccv = document.querySelector("#ccv").value;
-        const date = document.querySelector("#date").value;
+        const numberInput = document.querySelector("#number");
+        const ccvInput = document.querySelector("#ccv");
+        const dateInput = document.querySelector("#date");
+
+        const number = numberInput.value;
+        const ccv = ccvInput.value;
+        const date = dateInput.value;
 
         //ERROR TEXT FÖR FEL INPUT
     
@@ -43,6 +48,11 @@ export const NewCard = () => {
           }
 
         dispatch(addCard({ number, ccv, date }));
+
+        //Rensa input efter submit
+        numberInput.value = "";
+        ccvInput.value = "";
+        dateInput.value = "";
     }
 
     return(

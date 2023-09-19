@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { getRandomUser } from "./CardSlice";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Card } from "./Card";
 
 export const Cards = () =>{
@@ -20,10 +20,8 @@ export const Cards = () =>{
             {cards.map((cards, index) => (
                <div key={index}> 
                     <Card user={user} cards={cards} index={index}/>    
-                </div>
-                    
-            ))}
-            
+                </div>        
+            ))}     
         </div>
     )
 }
