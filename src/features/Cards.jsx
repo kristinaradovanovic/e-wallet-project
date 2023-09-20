@@ -13,9 +13,9 @@ export const Cards = () =>{
   }, [dispatch]);
 
   return(
-    <div>
-      <div>
-        <h3>Active Cards</h3>
+    <div className="homePageWrapper">
+      <div className="cardsWrap">
+        <h3>Active Card</h3>
         {cards.map((card, index) => {
           if (card.active) {
             return (
@@ -26,7 +26,7 @@ export const Cards = () =>{
           }
         })}
       </div>
-      <div>
+      <div className="cardsWrap">
         <h3>Inactive Cards</h3>
         {cards.map((card, index) => {
           if (!card.active) {

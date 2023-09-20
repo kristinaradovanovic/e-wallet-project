@@ -29,10 +29,19 @@ const cardSlice = createSlice({
         deleteCard: (state, action) => {
             state.cards.splice(action.payload, 1);
           },
-        toggleCardActive: (state, action) => {
+          toggleCardActive: (state, action) => {
             const cardIndex = action.payload;
-            state.cards[cardIndex].active = !state.cards[cardIndex].active;
-        },
+            if (state.cards[cardIndex].active) {
+              state.cards[cardIndex].active = false;
+            } else {
+              state.cards.forEach((card, index) => {
+                if (index !== cardIndex) {
+                  card.active = false;
+                }
+              });
+              state.cards[cardIndex].active = true;
+            }
+          },
     },
     extraReducers: {
         [getRandomUser.fulfilled]: (state, action) =>{
