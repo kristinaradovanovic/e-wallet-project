@@ -4,6 +4,8 @@ import { deleteCard, toggleCardActive } from "./CardSlice";
 export const Card = ({ user, cards, index }) => {
   const dispatch = useDispatch();
 
+/*   console.log(`index: ${index}`); */
+
   const handleDelete = () => {
     if (!cards.active) {
       dispatch(deleteCard(index));
@@ -16,16 +18,7 @@ export const Card = ({ user, cards, index }) => {
 
   return (
     <div className="pageWrapper">
-      {cards.active ? (
-        <div className="activeCards">
-          
-        </div>
-      ) : (
-        <div className="inactiveCards">
-          
-        </div>
-      )}
-
+      
       <div className={`cardWrapper ${cards.active ? "activeCard" : "inactiveCard"}`}>
         <div className="iconHolder">
           <p><strong>CCV:</strong> {cards.ccv}</p>

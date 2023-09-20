@@ -4,24 +4,40 @@ import { useEffect } from "react";
 import { Card } from "./Card";
 
 export const Cards = () =>{
-    const dispatch = useDispatch();
-    const user = useSelector((state) => state.user.user)
-    const cards = useSelector((state) => state.cards.cards);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.user)
+  const cards = useSelector((state) => state.cards.cards);
 
-    console.log(cards);
+  useEffect (()=>{
+    dispatch(getRandomUser())
+  }, [dispatch]);
 
-    useEffect (()=>{
-        dispatch(getRandomUser())
-
-    }, [dispatch]);
-
-    return(
-        <div>
-            {cards.map((cards, index) => (
-               <div key={index}> 
-                    <Card user={user} cards={cards} index={index}/>    
-                </div>        
-            ))}     
-        </div>
-    )
+  return(
+    <div>
+      <div>
+        <h3>Active Cards</h3>
+        {cards.map((card, index) => {
+          if (card.active) {
+            return (
+              <div key={index}>
+                <Card user={user} cards={card} index={index}/>
+              </div>
+            );
+          }
+        })}
+      </div>
+      <div>
+        <h3>Inactive Cards</h3>
+        {cards.map((card, index) => {
+          if (!card.active) {
+            return (
+              <div key={index}>
+                <Card user={user} cards={card} index={index}/>
+              </div>
+            );
+          }
+        })}
+      </div>
+    </div>
+  )
 }
