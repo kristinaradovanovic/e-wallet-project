@@ -5,10 +5,11 @@ import "../styling/Card.css";
 import wifi from "../assets/wifi.png";
 import cardIcon from "../assets/card.png";
 
+
 export const Card = ({ user, cards, index }) => {
   const dispatch = useDispatch();
 
-  const formattedCardNumber = cards.number.replace(/(.{4})(?!$)/g, '$1 ');
+  const formattedCardNumber = cards.number.replace(/(.{4})(?!$)/g, "$1 ");
 
   const [userInformation, setUserInformation] = useState("");
 
@@ -30,14 +31,17 @@ export const Card = ({ user, cards, index }) => {
     dispatch(toggleCardActive(index));
   };
 
+ 
+
   return (
     <>
+      
       <div className={`cardWrapper ${cards.active ? "activeCard" : "inactiveCard"}`}>
         <div className="iconHolder">
           <img src={wifi} alt="" className="iconImage" />
           <img src={cardIcon} alt="" className="iconImage" />
         </div>
-
+        
         <div className="cardNumber">
           <h3>{formattedCardNumber}</h3>
         </div>
@@ -72,6 +76,7 @@ export const Card = ({ user, cards, index }) => {
       </div>
     </>
   );
+
 };
 
 
