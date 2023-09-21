@@ -2,7 +2,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { addCard } from "../features/CardSlice";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState} from "react";
 import { NewCardExample } from "../features/NewCardExample";
 import "../styling/NewCard.css"
 
@@ -10,11 +10,14 @@ import "../styling/NewCard.css"
 export const NewCard = () => {
     const dispatch = useDispatch();
     const user = useSelector((state) => state.user.user);
+    const cards = useSelector((state) => state.cards.cards);
 
     const [numberError, setNumberError] = useState("");
     const [ccvError, setCcvError] = useState("");
     const [dateError, setDateError] = useState("");
+    const [selectedVendor, setSelectedVendor] = useState("");
 
+    const canAddCard = cards.length <= 4;
 
 //HANDLE SUBMIT + ALLa ERROR MESSAGE OM ANVÄNDARE SKRIVER FEL INPUT 
     const handleSubmit = () => {
@@ -49,12 +52,19 @@ export const NewCard = () => {
             setDateError("");
           }
 
-        dispatch(addCard({ number, ccv, date, active: false }));
 
-        //Rensa input efter submit
-        numberInput.value = "";
-        ccvInput.value = "";
-        dateInput.value = "";
+        if (canAddCard) {
+            dispatch(addCard({ number, ccv, date, active: false, vendor: selectedVendor }));
+    
+            // Clear input fields and reset the selectedVendor
+            numberInput.value = "";
+            ccvInput.value = "";
+            dateInput.value = "";
+            setSelectedVendor("");
+        } else {
+            alert("You can only add a maximum of 4 cards.");
+        }
+
     }
 
     return(
@@ -92,26 +102,22 @@ export const NewCard = () => {
                         e.target.value = e.target.value.replace(/[^0-9]/g, ''); 
                     }} required /> 
                 </div>
+                <select
+                        value={selectedVendor}
+                        onChange={(e) => setSelectedVendor(e.target.value)} 
+                    >
+                        <option value="">Select Vendor</option>
+                        <option value="Mastercard">Mastercard</option>
+                        <option value="Visa">Visa</option>
+                        <option value="Amex">Amex</option>
+                </select>
 
                 <button onClick={handleSubmit}>Save</button>
 
                 <Link to="/" ><button>Add Cards</button></Link>
-
-
-            </div>
-
-
-            
+            </div>   
         </div>
     )
 }
 
 
- 
-
-{/* CCV Input */}
-
-
-
-
-{/* ADD/SUBMIT */}

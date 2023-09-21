@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { deleteCard, toggleCardActive } from "./CardSlice";
 import "../styling/Card.css";
 import wifi from "../assets/wifi.png";
-import cardIcon from "../assets/card.png";
 /* import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCoffee } from '@fortawesome/free-solid-svg-icons' */
 
@@ -14,6 +13,7 @@ export const Card = ({ user, cards, index }) => {
   const formattedCardNumber = cards.number.replace(/(.{4})(?!$)/g, "$1 ");
 
   const [userInformation, setUserInformation] = useState("");
+  const [selectedForActivation, setSelectedForActivation] = useState(false);
 
   const capitalizeUserInformation = (user) => {
     return `${user.name?.title} ${user.name?.first} ${user.name?.last}`.toUpperCase();
@@ -36,10 +36,11 @@ export const Card = ({ user, cards, index }) => {
   return (
     <>
       
-      <div className={`cardWrapper ${cards.active ? "activeCard" : "inactiveCard"}`}>
+      <div className={`cardWrapper ${cards.active ? "activeCard" : "inactiveCard"}`}
+        onClick={cards.active ? null : handleToggleActive}>
         <div className="iconHolder">
           <img src={wifi} alt="" className="iconImage" />
-          <img src={cardIcon} alt="" className="iconImage" />
+          <p >{cards.vendor}</p>
         </div>
         
         <div className="cardNumber">
@@ -55,7 +56,7 @@ export const Card = ({ user, cards, index }) => {
 
         <div className="infoWrapper">
           <div className="holderInfo">
-            <p>Card Holder</p>
+            <p>Card Holder Name</p>
             <p id="userText">{userInformation}</p>
           </div>
 
@@ -70,19 +71,8 @@ export const Card = ({ user, cards, index }) => {
         <button onClick={handleDelete} disabled={cards.active}>
           Delete
         </button>
-        <button onClick={handleToggleActive}>
-          {cards.active ? "Deactivate" : "Activate"}
-        </button>
       </div>
     </>
   );
-
+  
 };
-
-
-
-
-
-
-
-
