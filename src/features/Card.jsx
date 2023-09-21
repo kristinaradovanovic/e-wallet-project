@@ -4,6 +4,8 @@ import { deleteCard, toggleCardActive } from "./CardSlice";
 import "../styling/Card.css";
 import wifi from "../assets/wifi.png";
 import cardIcon from "../assets/card.png";
+/* import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCoffee } from '@fortawesome/free-solid-svg-icons' */
 
 
 export const Card = ({ user, cards, index }) => {
@@ -30,8 +32,6 @@ export const Card = ({ user, cards, index }) => {
   const handleToggleActive = () => {
     dispatch(toggleCardActive(index));
   };
-
- 
 
   return (
     <>
