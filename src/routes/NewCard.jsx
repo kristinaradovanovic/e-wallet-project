@@ -70,7 +70,7 @@ export const NewCard = () => {
     return(
         <div>
 
-            <h1>Add Cards</h1>
+            <h1>Add New Card</h1>
                 <NewCardExample/>
             
             <div className="inputWrapper">
