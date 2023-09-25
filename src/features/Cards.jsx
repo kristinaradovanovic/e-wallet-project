@@ -15,16 +15,18 @@ export const Cards = () =>{
   return(
     <div className="homePageWrapper">
       <div className="cardsWrap">
-        <h3>Active Card</h3>
-        {cards.map((card, index) => {
-          if (card.active) {
-            return (
-              <div key={index}>
-                <Card user={user} cards={card} index={index}/>
-              </div>
-            );
-          }
-        })}
+       <div className="activeCardWrapp">
+          <h3>Active Card</h3>
+            {cards.map((card, index) => {
+              if (card.active) {
+                return (
+                  <div key={index}>
+                    <Card user={user} cards={card} index={index}/>
+                  </div>
+                );
+              }
+            })}
+       </div>
       </div>
       <div className="cardsWrap">
         <h3>Inactive Cards</h3>

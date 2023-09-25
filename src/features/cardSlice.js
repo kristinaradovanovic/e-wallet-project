@@ -22,7 +22,7 @@ const cardSlice = createSlice({
         cards: [{
           number: "1234567891234567",
           ccv: "197",
-          date:"1225",
+          date:"2025",
           active: true,
           vendor: "Mastercard"
         }],
