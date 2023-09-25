@@ -13,7 +13,6 @@ export const Card = ({ user, cards, index }) => {
   const formattedCardNumber = cards.number.replace(/(.{4})(?!$)/g, "$1 ");
 
   const [userInformation, setUserInformation] = useState("");
-  const [selectedForActivation, setSelectedForActivation] = useState(false);
 
   const capitalizeUserInformation = (user) => {
     return `${user.name?.title} ${user.name?.first} ${user.name?.last}`.toUpperCase();
