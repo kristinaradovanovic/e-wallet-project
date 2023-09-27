@@ -22,16 +22,18 @@ export const NewCardExample = ({ cardData }) => {
   const userText = cardData.name || "FIRST AND LAST NAME";
   const monthYear = getMonthYear(cardData.date);
 
+  const formattedCardNumber = cardNumber.replace(/(.{4})(?!$)/g, "$1 ");
+
   return (
     <div className="cardsWrap">
       <div className="cardWrapper">
         <div className="iconHolder">
           <img src={wifi} alt="" className="iconImage" />
-          <img src={cardIcon} alt="" className="iconImage" />
+          <p>{cardData.vendor}</p>
         </div>
 
         <div className="cardNumber">
-          <h3>{cardNumber}</h3>
+          <h3>{formattedCardNumber}</h3>
         </div>
 
         <div className="ccvHolder">
