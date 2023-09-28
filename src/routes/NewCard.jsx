@@ -14,7 +14,6 @@ export const NewCard = () => {
 
     const [numberError, setNumberError] = useState("");
     const [ccvError, setCcvError] = useState("");
-    /* const [dateError, setDateError] = useState(""); */
     const [selectedVendor, setSelectedVendor] = useState("");
     const [cardData, setCardData] = useState({
 
